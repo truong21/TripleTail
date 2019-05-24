@@ -18,8 +18,17 @@ def homepage():
     """
     Landing page
     """
-    # TODO - insert html file name and necessary variables
-    return render_template(info)
+    return render_template('index.html')
+
+@app.route('/<username>/tier/')
+def tier_page(username):
+    """
+    Returns a page containing the Tier of the
+    Github user
+    """
+    userinfo = User(userinfo)
+    return render_template('ranking.html',
+                           userinfo=userinfo)
 
 if __name__ == "__main__":
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
