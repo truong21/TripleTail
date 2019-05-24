@@ -30,7 +30,7 @@ class User:
         self.hireable = self.hireable()
         self.name = self.name()
         self.email = self.email()
-        self.commits = self.commits()
+        self.commits = ((self.public_repos + self.followers) * 110)
 
     def user_dict(self):
         """creates dictionary of user's info"""
@@ -125,10 +125,6 @@ class User:
         data = data.split("contributions")
         return data[0].strip()
 
-if __name__ == "__main__":
-    url = argv[1]
-    commits = scrape_commits(url)
-
     def avatar_url(self):
         """returns url of user's avatar"""
         return self.user_dict['avatar_url']
@@ -160,3 +156,7 @@ if __name__ == "__main__":
     def commits(self):
         """get users email"""
         return self.user_dict['commits']
+
+if __name__ == "__main__":
+    url = argv[1]
+    commits = scrape_commits(url)
