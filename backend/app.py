@@ -15,7 +15,6 @@ host = '0.0.0.0'
 # Cross-Origin Resource sharing
 cors = CORS(app, resouces={r"/*": {"origins": "*"}})
 
-
 def page_not_found(e):
     """404 error page for nonexistent routes"""
     return jsonify({'error': "Not found"}), 404
@@ -39,7 +38,8 @@ def tier_page(username):
 
 @app.route('/testing')
 def test():
-    return render_template('ranking.html')
+    userinfo = {'tier': 'tier1'}
+    return render_template('ranking.html', userinfo=userinfo)
 
 @app.route('/<username>/stats')
 def followers():

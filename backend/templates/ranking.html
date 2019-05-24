@@ -22,7 +22,7 @@
         
 	<i class="fas fa-presription-bottle-alt"></i>
 	<!-- Triggering button -->
-        <div style="cursor: pointer" id="rotatefront">
+        <div style="cursor: pointer" id="rotatefront" class="rotate-button">
 	  <a class="rotate-btn" data-card="card-1"><i class="fas fa-redo-alt"></i> Click here to see your ranking!</a>
 	</div>
       </div>
@@ -32,14 +32,21 @@
     <!-- Back Side -->
     <div class="face back">
       <div class="card-body">
-
+      {% if userinfo.tier == 'tier1' %}
+        <div class="avatar mx-auto white"><img src="{{ url_for('static', filename='images/sloth.png') }}" class="img-fluid">
+      {% elif userinfo.tier == 'tier2' %}
+        <p>Hi</p>
+      {% else %}
+        <p> last </p>
+      {% endif %}
+      	
         <!-- Content -->
         <h4 class="font-weight-bold mb-0">About This Rank</h4>
         <hr>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat tenetur odio suscipit non commodi vel
           eius veniam maxime?
-          <div style="cursor: pointer" id="rotateback">
+          <div style="cursor: pointer" id="rotateback" class="rotate-button">
 	    <a class="rotate-btn" data-card="card-1"><i class="fas fa-undo"></i>Back to Profile</a>
 	  </div>
       </div>
