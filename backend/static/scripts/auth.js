@@ -5,7 +5,7 @@ const ready = () => {
 const login = () => {
 	$('.signin .github-signin').click(github_oauth());
 }
-const github_oauth = ()=> {
+const github_oauth = () => {
   // Requests an api, which retrieves the auth token
  let github_auth_url = `https://github.com/login/oauth/authorize`
 
@@ -17,9 +17,10 @@ const github_oauth = ()=> {
 		"client_id": "926a308eec433f17e3ff",
 		"scope": {"user": "email"}
 	},
+    contentType: "application/json",
     success: function (data, textStatus, jQxhr) {
 		alert("hi")
       }
-	})
+  });
 }
 document.addEventListener('DOMContentLoaded', ready);
