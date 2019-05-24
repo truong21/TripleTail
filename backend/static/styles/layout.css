@@ -43,3 +43,23 @@ body.blue {
 .facebook-button, .twitter-button {
   display: inline-block;
 }
+
+.logo-corner {
+  background-image: url('../images/clogo.png');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  
+}
+
+.logo-corner h2 {
+  padding-left: 3rem;
+}
+
+.col-4 .row {
+  padding-top: 1rem;
+}
+
+.twitter-button, .facebook-button {
+  padding-left: 1rem;
+}

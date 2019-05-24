@@ -36,7 +36,7 @@ def homepage():
 
 @app.route('/testing')
 def test():
-    userinfo = {'tier': 'tier1', 'username': 'hello', 'name': 'Random Name'}
+    userinfo = {'tier': 'tier1', 'username': 'hello', 'name': 'Random Name', 'public_repos': 10,        'followers': 10, 'hireable': 'Yes'}
     return render_template('ranking.html', userinfo=userinfo)
 
 
