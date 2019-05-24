@@ -52,9 +52,11 @@ class User:
         self.created_at = datetime.strptime(self.user_dict['created_at'], "%Y-%m-%dT%H:%M:%SZ")
         age = self.now - self.created_at
         age_str = str(age)
-        age_str_split = re.split('[, :\.]+', age_str)
-        age_dhms = age_str_split[0] + ' days ' + age_str_split[1] + ' hours ' + age_str_split[2] + ' minutes ' + age_str_split[3] + ' seconds'
-        print(age_dhms)
+        age_str_split = re.split('[, :\.]*', age_str)
+        if len(age_str_split) > 5:
+            age_dhms = age_str_split[0] + ' ' + age_str_split[1] + ' ' + age_str_split[2] + ' hours ' + age_str_split[3] + ' minutes ' + age_str_split[4] + ' seconds'
+        else:
+            age_dhms = '0 days ' + age_str_split[0] + ' hours ' + age_str_split[1] + ' minutes ' + age_str_split[2] + ' seconds'
         return age_dhms
 
     def readme_pct(self):
