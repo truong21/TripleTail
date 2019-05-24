@@ -14,7 +14,7 @@ def page_not_found(e):
     """404 error page for nonexistent routes"""
     return jsonify({'error': "Not found"}), 404
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def homepage():
     """
     Landing page
