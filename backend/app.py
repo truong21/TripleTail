@@ -9,7 +9,7 @@ from user import User
 # Flask setup
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-host = '127.0.0.1'
+host = '0.0.0.0'
 
 # Cross-Origin Resource sharing
 cors = CORS(app, resouces={r"/*": {"origins": "*"}})
