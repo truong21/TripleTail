@@ -36,7 +36,7 @@ def tier_page(debug=True):
         user_info = User(oauth_token)
         return render_template('ranking.html',
                                token=oauth_token,
-                               user_info=user_info.to_dict())
+                               user_info=user_info.__dict__)
 
 @app.route('/<username>/stats')
 def followers

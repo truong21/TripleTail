@@ -13,11 +13,11 @@ class User:
     url = 'https://api.github.com'
     tiers = {'tier1': 'O(n!)', 'tier2': 'O(n)', 'tier3': 'O(1)'}
 
-    def __init__(self, username, password):
+    def __init__(self, token):
         """instantiation of User class object"""
-        self.username = username
-        self.password = password
+        self.token = token
         self.user_dict = self.user_dict()
+        self.username = self.username()
         self.public_repos = self.public_repos()
         self.followers = self.followers()
         self.account_age = self.account_age()
@@ -32,9 +32,7 @@ class User:
 
     def user_dict(self):
         """creates dictionary of user's info"""
-        usern = self.username
-        passw = self.password
-        r = requests.get('https://api.github.com/user', auth=(usern, passw))
+        r = requests.get('https://api.github.com/user', auth=(self.token))
         allowed = ['public_repos', 'followers']
         return r.json()
 
@@ -59,12 +57,12 @@ class User:
 
     def readme_pct(self):
         """Returns the percentage of repos that have a README"""
-        repo_list = requests.get('{}/users/{}/repos'.format(self.url, self.username), auth=(self.username, self.password)).json()
+        repo_list = requests.get('{}/users/{}/repos'.format(self.url, self.username), auth=(self.token)).json()
         readme_count = 0
         if self.user_dict.get('public_repos') is 0:
             return 0
         for repo in repo_list:
-            response = requests.get('{}/repos/{}/{}/readme'.format(self.url, self.username, repo.get('name')), auth=(self.username, self.password))
+            response = requests.get('{}/repos/{}/{}/readme'.format(self.url, self.username, repo.get('name')), auth=(self.token))
             if response.status_code == 404:
                 pass
             else:
@@ -85,6 +83,10 @@ class User:
     def avatar_url(self):
         """returns url of user's avatar"""
         return self.user_dict['avatar_url']
+
+    def username(self):
+        """returns username"""
+        return self.user_dict['login']
 
     def following(self):
         """returns number of users the user is following"""
