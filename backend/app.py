@@ -3,6 +3,7 @@
 website"""
 
 from flask import Flask, jsonify, render_template
+from user import User
 
 # Flask setup
 app = Flask(__name__)
@@ -27,13 +28,18 @@ def tier_page(username):
     Returns a page containing the Tier of the
     Github user
     """
-    userinfo = User(userinfo)
+    userinfo = User(username)
     return render_template('ranking.html',
                            userinfo=userinfo)
 
 @app.route('/testing')
 def test():
     return render_template('ranking.html')
+
+@app.route('/<username>/stats')
+def followers():
+    pass
+
 
 if __name__ == "__main__":
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
