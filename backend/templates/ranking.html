@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
+{% block css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/ranking.css') }}">
+{% endblock %}
 
 {% block content %}
-  <div class="container">
-  
-    <div class="card" style="width:100%">
-      <img class="card-img-top" src="{{ url_for('static', filename='images/image.png') }}" alt="Card image" style="width:80%">
-      <div class="card-body">
-      <h4 class="card-title">Insert Name Here</h4>
-      <p class="card-text">Something</p>
+
+  <div class="front-side card my-card">
+    <img class="user-image" src="{{ url_for('static', filename='images/image.png') }}" alt="Card image">
+    <div class="front-side-body">
+      <h4 class="display-4">USERNAME HERE</h4>
+      <ul>
+      	<li>INSERT LIST HERE</li>
+	<li>Listttt</li>
+      </ul>
     </div>
   </div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/ranking.js') }}"></script>
 {% endblock %}
