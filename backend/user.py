@@ -4,7 +4,8 @@ this module contains a User class
 """
 
 
-import datetime
+from datetime import datetime, timedelta
+import re
 import requests
 
 class User:
@@ -35,4 +36,12 @@ class User:
         """returns number of followers of a user"""
         return self.user_dict['followers']
 
-    def 
+    def account_age(self):
+        """calculates and returns age of the account"""
+        self.now = datetime.now()
+        self.created_at = datetime.strptime(self.user_dict['created_at'], "%Y-%m-%dT%H:%M:%SZ")
+        age = self.now - self.created_at
+        age_str = str(age)
+        age_str_split = re.split('[, :\.]+', age_str)
+        age_dhms = age_str_split[0] + ' ' + age_str_split[1] + ' ' + age_str_split[2] + ' hours ' + age_str_split[3] + ' minutes ' + age_str_split[4] + ' seconds'
+        return age_dhms
