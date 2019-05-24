@@ -62,3 +62,8 @@ class User:
             else:
                 readme_count += 1
         return '{:.1%}'.format(readme_count/self.user_dict.get('public_repos'))
+
+    def following(self):
+        """returns number of users the user is following"""
+        return self.user_dict['following']
+
