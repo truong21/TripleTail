@@ -78,3 +78,23 @@ class User:
     def avatar_url(self):
         """returns url of user's avatar"""
         return self.user_dict['avatar_url']
+
+    def following(self):
+        """returns number of users the user is following"""
+        return self.user_dict['following']
+
+    def bio(self):
+        """get users bio"""
+        return self.user_dict['bio']
+
+    def hireable(self):
+        """status on whether user is hireable"""
+        return self.user_dict['hireable']
+
+    def name(self):
+        """users name on github"""
+        return self.user_dict['name']
+
+    def email(self):
+        """get users email"""
+        return self.user_dict['email']
