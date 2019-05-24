@@ -11,6 +11,7 @@ import requests
 class User:
     """a User class"""
     url = 'https://api.github.com'
+    tiers = {'tier1': 'O(n!)', 'tier2': 'O(n)', 'tier3': 'O(1)'}
 
     def __init__(self, *args, **kwargs):
         """instantiation of User class object"""
@@ -62,3 +63,18 @@ class User:
             else:
                 readme_count += 1
         return '{:.1%}'.format(readme_count/self.user_dict.get('public_repos'))
+
+    def tier(self):
+        """returns the tier of the user"""
+        acc_age_str_split = self.account_age.split()
+        days_old = acc_age_str_split[0]
+        if self.followers > 4 and self.public_repos > 10 and int(days_old) > 180:
+            return User.tiers['tier3']
+        elif self.followers > 0 and self.public_repos > 4 and int(days_old) > 90:
+            return User.tiers['tier2']
+        else:
+            return User.tiers['tier1']
+
+    def avatar_url(self):
+        """returns url of user's avatar"""
+        return self.user_dict['avatar_url']
