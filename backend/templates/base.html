@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" type="text/css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}" type="text/css">
+    {% block css %}{% endblock %}
+    <title>{% block title %}{% endblock %} - Triple Tail</title>
+  </head>  
+  <body class="black">
+	<div class="header w-75 row">
+      <div class="navbar-brand logo align-content-center col-8">
+		<h2>Triple Tail</h2>
+      </div>
+      <div class="col-4">
+        <div class="row">
+          {% block log_out %}{% endblock %}
+          <div class="col">
+            <div class="facebook-button">
+              <a href="http://fb.me/TheTripletail" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </div>
+            <div class="twitter-button">
+              <a href="https://twitter.com/_Tripletail" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+        <button class="btn-clear" style="font-size: 20px;">💡</button> 
+        </div>
+      </div>
+	</div>
+    <section class="content">
+      <header>
+        {% block header %}{% endblock %}
+      </header>
+
+      {% block content %}{% endblock %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src= "https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous" type="type/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" type="text/javascript"></script>
+	<script
+src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/design.js') }}"></script>
+    {% block script %}{% endblock %}
+  </body>
+</html>

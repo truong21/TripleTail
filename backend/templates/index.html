@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid w-75">
+   <h1 id="logo">
+    <a> <img src="/static/images/clogo.png" alt="cropped logo" /></a>
+    </h1> 
+    <div class="sign-in">
+      <form method="post" class="form-signin">
+        <label for="username" class="sr-only"><b>Username</b></label>
+        <input class="form-control" placeholder="Github Username" name="username" required>
+
+        <label for="password" class="sr-only"><b>Password</b></label>
+        <input type="password" class="form-control" placeholder="Github Password" name="password" required>
+
+        <button class="btn btn-lg btn-primary btn-block github-signin" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block script %}
+  <script type="text/javascript" src="{{ url_for('static', filename='scripts/auth.js') }}"></script>
+
+{% endblock %}
