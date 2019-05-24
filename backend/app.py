@@ -12,7 +12,7 @@ import requests
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 host = '0.0.0.0'
-
+host = '127.0.0.1'
 # Cross-Origin Resource sharing
 cors = CORS(app, resouces={r"/*": {"origins": "*"}})
 
