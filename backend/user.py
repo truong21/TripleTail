@@ -30,7 +30,7 @@ class User:
         self.name = self.name()
         self.email = self.email()
 
-        def user_dict(self):
+    def user_dict(self):
         """creates dictionary of user's info"""
         usern = self.username
         passw = self.password
@@ -53,13 +53,16 @@ class User:
         age = self.now - self.created_at
         age_str = str(age)
         age_str_split = re.split('[, :\.]+', age_str)
-        age_dhms = age_str_split[0] + ' ' + age_str_split[1] + ' ' + age_str_split[2] + ' hours ' + age_str_split[3] + ' minutes ' + age_str_split[4] + ' seconds'
+        age_dhms = age_str_split[0] + ' days ' + age_str_split[1] + ' hours ' + age_str_split[2] + ' minutes ' + age_str_split[3] + ' seconds'
+        print(age_dhms)
         return age_dhms
 
     def readme_pct(self):
         """Returns the percentage of repos that have a README"""
         repo_list = requests.get('{}/users/{}/repos'.format(self.url, self.username), auth=(self.username, self.password)).json()
         readme_count = 0
+        if self.user_dict.get('public_repos') is 0:
+            return 0
         for repo in repo_list:
             response = requests.get('{}/repos/{}/{}/readme'.format(self.url, self.username, repo.get('name')), auth=(self.username, self.password))
             if response.status_code == 404:
