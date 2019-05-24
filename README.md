@@ -1,6 +1,6 @@
 # TripleTail
 
-Description:
+## Description:
 
 **What Tripletail does**: Help the worlds best software engineers build stronger Github profiles and ultimately get hired. Tripletail provides software engineers with real time metrics about the quality of their Github profile and how they stack up in the community.
 
