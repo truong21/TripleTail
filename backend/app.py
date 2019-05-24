@@ -2,7 +2,7 @@
 """Start Flask web app for our TripleTail
 website"""
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from user import User
 
 # Flask setup
@@ -21,18 +21,25 @@ def homepage():
     """
     return render_template('index.html')
 
-@app.route('/<username>/tier/')
-def tier_page(username):
+@app.route('/tier/', methods=['POST'])
+def tier_page(debug=True):
     """
-    Returns a page containing the Tier of the
-    Github user
+    Takes a POST request with the
+    Oauth2 token of the new user and
+    returns a page containing the Tier
+    and stats of the Github user
     """
-    userinfo = User(username)
-    return render_template('ranking.html',
-                           userinfo=userinfo)
+    oauth_token = request.data
+    if oauth_token is None:
+        return render_template('index.html')
+    else:
+        user_info = User(oauth_token)
+        return render_template('ranking.html',
+                               token=oauth_token,
+                               user_info=user_info.to_dict())
 
 @app.route('/<username>/stats')
-def followers 
+def followers
 
 
 if __name__ == "__main__":
