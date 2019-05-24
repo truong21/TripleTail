@@ -31,6 +31,10 @@ def tier_page(username):
     return render_template('ranking.html',
                            userinfo=userinfo)
 
+@app.route('/testing')
+def test():
+    return render_template('ranking.html')
+
 if __name__ == "__main__":
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
     app.register_error_handler(404, page_not_found)
