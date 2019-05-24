@@ -2,7 +2,7 @@
 """Start Flask web app for our TripleTail
 website"""
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, redirect
 from flask_cors import CORS, cross_origin
 from user import User
 
@@ -12,7 +12,6 @@ import requests
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 host = '127.0.0.1'
-host = '0.0.0.0'
 
 # Cross-Origin Resource sharing
 cors = CORS(app, resouces={r"/*": {"origins": "*"}})
@@ -20,7 +19,8 @@ cors = CORS(app, resouces={r"/*": {"origins": "*"}})
 authorization_base_url = 'https://github.com/login/oauth/authorize'
 token_url = 'https://github.com/login/oauth/access_token'
 request_url = 'https://api.github.com'
-
+CLIENT_ID = 'fc7898a36c14f4741541'
+CLIENT_SECRET = '1c1b25dce0158ddfe11e54547ba8500a753058b7'
 
 def page_not_found(e):
     """404 error page for nonexistent routes"""
@@ -31,6 +31,16 @@ def homepage():
     """
     Landing page
     """
+    if request.method == 'GET': 
+        params = {'client_id': CLIENT_ID,
+                 } 
+        r = requests.get('https://github.com/login/oauth/authorize', params=params)
+        redirect(r.url);
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
     return render_template('index.html')
 
 @app.route('/tier/', methods=['POST'])
@@ -40,7 +50,7 @@ def tier_page(debug=True):
     Oauth2 token of the new user and
     returns a page containing the Tier
     and stats of the Github user
-    """
+"""
     oauth_token = request.data
     if oauth_token is None:
         return render_template('index.html')

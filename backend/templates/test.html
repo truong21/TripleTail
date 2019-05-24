@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/ranking.css') }}">
+{% endblock %}
+
+{% block content %}
+
+  <div class="card-wrapper">
+    <div id="card-1" class="card card-rotating text-center">
+      <div class="front-side my-card face front">
+        <img class="user-image" src="{{ url_for('static', filename='images/image.png') }}" alt="Card image">
+        <div class="front-side-body">
+          <h4 class="display-4">USERNAME HERE</h4>
+          <ul>
+      	    <li>INSERT LIST HERE</li>
+	    <li>Listttt</li>
+          </ul>
+	  <a class="rotate-btn" data-card="card-1"><i class="fas fa-redo-alt"></i> Click here to rotate</a>
+        </div>
+      </div>
+
+      <div class="face back">
+      	<div class="card-body">
+      	<p>HELLO</p>
+	</div>
+	<a class="rotate-btn" data-card="card-1"><i class="fas fa-undo"></i> Click here to rotate back</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/ranking.js') }}"></script>
+{% endblock %}
