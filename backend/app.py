@@ -36,7 +36,7 @@ def homepage():
 
 @app.route('/testing')
 def test():
-    userinfo = {'tier': 'tier1'}
+    userinfo = {'tier': 'tier1', 'username': 'hello', 'name': 'Random Name'}
     return render_template('ranking.html', userinfo=userinfo)
 
 
@@ -58,6 +58,7 @@ def handle_callback():
         resp = req.json()
         if 'access_token' in resp:
             user_info = User(resp['access_token'])
+            print(user_info.__dict__)
             return render_template('ranking.html', userinfo=user_info.__dict__)
         else:
             return render_template('index.html')

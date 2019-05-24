@@ -95,12 +95,10 @@ class User:
         acc_age_str_split = self.account_age.split()
         days_old = acc_age_str_split[0]
         if self.followers > 4 and \
-                self.public_repos > 10 and \
-                int(days_old) > 180:
+                self.public_repos > 10:
             return User.tiers['tier3']
         elif self.followers > 0 and \
-                self.public_repos > 4 and \
-                int(days_old) > 90:
+                self.public_repos > 4:
             return User.tiers['tier2']
         else:
             return User.tiers['tier1']

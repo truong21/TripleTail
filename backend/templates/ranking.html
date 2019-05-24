@@ -11,15 +11,16 @@
     <div class="face front">
 
       <!-- Avatar -->
-      <div class="avatar-git mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20).jpg" class="rounded-circle img" alt="Sample avatar image.">
+      <div class="avatar-git mx-auto white"><img src="{{ userinfo.avatar_url }}" class="rounded-circle img" alt="Sample avatar image.">
       </div>
 
       <!-- Content -->
       <div class="card-body">
-        <h4 class="font-weight-bold mb-3">Marie Johnson</h4>
-        <p class="font-weight-bold blue-text">Web developer</p>
-        
-	<i class="fas fa-presription-bottle-alt"></i>
+        <h4 class="font-weight-bold mb-3">{{ userinfo.name }}</h4>
+        <p class="font-weight-bold blue-text">{{ userinfo.username }}</p>
+	<p class="font-weight-bold blue-text">Public Repos: {{ userinfo.public_repos }}</p>
+	<p class="font-weight-bold blue-text">Followers: {{ userinfo.followers }}</p>
+	<p class="font-weight-bold blue-text">Hireable: {{ userinfo.hireable }}</p>
 	<!-- Triggering button -->
         <div style="cursor: pointer" id="rotatefront" class="rotate-button">
 	  <a class="rotate-btn" data-card="card-1"><i class="fas fa-redo-alt"></i> Click here to see your ranking!</a>
@@ -31,20 +32,20 @@
     <!-- Back Side -->
     <div class="face back">
       <div class="card-body">
-      {% if userinfo.tier == 'tier1' %}
+      {% if userinfo.tier == 'O(n!)' %}
         <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/sloth.png') }}"></div>
         <h4 class="font-weight-bold mb-0">About This Rank</h4>
         <hr>
 	<h6 class="font-weight-bold mb-0">Rank</h6>
-	  <p>O(n<sup>2</sup>)</p>
+	  <p>O(n!)</p>
         <p>This mighty sloth is on its way to greatness</p>
 	
-      {% elif userinfo.tier == 'tier2' %}
+      {% elif userinfo.tier == 'O(n)' %}
         <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/elephant.png') }}"></div>
         <h4 class="font-weight-bold mb-0">Rank</h4>
         <hr>
 	<h6 class="font-weight-bold mb-0">Time Complexity</h6>
-	  <p>O(log(n))</p>
+	  <p>O(n)</p>
         <p>Mediocrity is the elephant in the room</p>
         
       {% else %}
@@ -52,8 +53,8 @@
         <h4 class="font-weight-bold mb-0">Rank</h4>
         <hr>
 	<h6 class="font-weight-bold mb-0">Time Complexity</h6>
-	  <p>O(1))</p>
-        <p>Long live the king</p>
+	  <p>O(1)</p>
+        <p>Long live the king!</p>
       {% endif %}
       	
         <!-- Content -->
