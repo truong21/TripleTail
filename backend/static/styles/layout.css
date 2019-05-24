@@ -1,12 +1,35 @@
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+	margin: 1rem;
+	box-sizing: border-box;
+	font-family: Avenir;
+	color: #6ec4db;
+	position: relative;
+	display: flex;
+	flex-wrap: nowrap;
+}
+
 body.black {
-  background-color: #0b0c10;
 }
 
 body.blue {
-  background-color: #45a29e;
 }
 
 .btn-clear {
   border: none;
   background: transparent;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
