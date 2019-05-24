@@ -12,25 +12,23 @@ class User:
     """a User class"""
     url = 'https://api.github.com'
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, username, password):
         """instantiation of User class object"""
-        if kwargs:
-            self.__set_attributes(kwargs)
-        self.user_dict = {}
+        self.username = username
+        self.password = password
+        self.user_dict = self.user_dict()
+        self.public_repos = self.public_repos()
+        self.followers = self.followers()
+        self.account_age = self.account_age()
+        self.readme_pct = self.readme_pct()
 
-    @property
-    def __set_attributes(self, attr_dict):
-        """sets attributes for a User object"""
-        for attr, val in attr_dict.items():
-            setattr(self, attr, val)
-
-    @property
     def user_dict(self):
         """creates dictionary of user's info"""
         usern = self.username
         passw = self.password
         r = requests.get('https://api.github.com/user', auth=(usern, passw))
-        self.user_dict = r.json()
+        allowed = ['public_repos', 'followers']
+        return r.json()
 
     def public_repos(self):
         """returns number of public repos of a user"""
@@ -50,13 +48,12 @@ class User:
         age_dhms = age_str_split[0] + ' ' + age_str_split[1] + ' ' + age_str_split[2] + ' hours ' + age_str_split[3] + ' minutes ' + age_str_split[4] + ' seconds'
         return age_dhms
 
-    @property
     def readme_pct(self):
         """Returns the percentage of repos that have a README"""
-        repo_list = requests.get('{}/users/{}/repos'.format(url, self.username), auth=(self.username, self.password))
+        repo_list = requests.get('{}/users/{}/repos'.format(self.url, self.username), auth=(self.username, self.password)).json()
         readme_count = 0
         for repo in repo_list:
-            response = requests.get('{}/repos/{}/{}/readme'.format(url, self.username, repo.get('name')), auth=(self.username, self.password))
+            response = requests.get('{}/repos/{}/{}/readme'.format(self.url, self.username, repo.get('name')), auth=(self.username, self.password))
             if response.status_code == 404:
                 pass
             else:
