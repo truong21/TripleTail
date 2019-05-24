@@ -2,7 +2,7 @@
 """Start Flask web app for our TripleTail
 website"""
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 from user import User
 
@@ -25,15 +25,22 @@ def homepage():
     """
     return render_template('index.html')
 
-@app.route('/<username>/tier/')
-def tier_page(username):
+@app.route('/tier/', methods=['POST'])
+def tier_page(debug=True):
     """
-    Returns a page containing the Tier of the
-    Github user
+    Takes a POST request with the
+    Oauth2 token of the new user and
+    returns a page containing the Tier
+    and stats of the Github user
     """
-    userinfo = User(username)
-    return render_template('ranking.html',
-                           userinfo=userinfo)
+    oauth_token = request.data
+    if oauth_token is None:
+        return render_template('index.html')
+    else:
+        user_info = User(oauth_token)
+        return render_template('ranking.html',
+                               token=oauth_token,
+                               user_info=user_info.__dict__)
 
 @app.route('/testing')
 def test():
