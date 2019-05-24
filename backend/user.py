@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 import re
 import requests
 
+
 class User:
     """a User class"""
     url = 'https://api.github.com'
@@ -32,7 +33,8 @@ class User:
 
     def user_dict(self):
         """creates dictionary of user's info"""
-        r = requests.get('https://api.github.com/user', auth=(self.token))
+        header = {'Authorization': 'Bearer {}'.format(self.token)}
+        r = requests.get('https://api.github.com/user', headers=header)
         allowed = ['public_repos', 'followers']
         return r.json()
 
@@ -47,24 +49,41 @@ class User:
     def account_age(self):
         """calculates and returns age of the account"""
         self.now = datetime.now()
-        self.created_at = datetime.strptime(self.user_dict['created_at'], "%Y-%m-%dT%H:%M:%SZ")
+        self.created_at = datetime.strptime(self.user_dict['created_at'],
+                                            "%Y-%m-%dT%H:%M:%SZ")
         age = self.now - self.created_at
         age_str = str(age)
         age_str_split = re.split('[, :\.]*', age_str)
         if len(age_str_split) > 5:
-            age_dhms = age_str_split[0] + ' ' + age_str_split[1] + ' ' + age_str_split[2] + ' hours ' + age_str_split[3] + ' minutes ' + age_str_split[4] + ' seconds'
+            age_dhms = age_str_split[0] \
+                + ' ' + age_str_split[1] \
+                + ' ' + age_str_split[2] \
+                + ' hours ' + age_str_split[3] \
+                + ' minutes ' + age_str_split[4] \
+                + ' seconds'
         else:
-            age_dhms = '0 days ' + age_str_split[0] + ' hours ' + age_str_split[1] + ' minutes ' + age_str_split[2] + ' seconds'
+            age_dhms = '0 days ' \
+                + age_str_split[0] \
+                + ' hours ' + age_str_split[1] \
+                + ' minutes ' + age_str_split[2] \
+                + ' seconds'
         return age_dhms
 
     def readme_pct(self):
         """Returns the percentage of repos that have a README"""
-        repo_list = requests.get('{}/users/{}/repos'.format(self.url, self.username), auth=(self.token)).json()
+        header = {'Authorization': 'Bearer {}'.format(self.token)}
+        repo_list = requests.get('{}/users/{}/repos'
+                                 .format(self.url, self.username),
+                                 headers=header).json()
         readme_count = 0
         if self.user_dict.get('public_repos') is 0:
             return 0
         for repo in repo_list:
-            response = requests.get('{}/repos/{}/{}/readme'.format(self.url, self.username, repo.get('name')), auth=(self.token))
+            response = requests.get('{}/repos/{}/{}/readme'
+                                    .format(self.url,
+                                            self.username,
+                                            repo.get('name')),
+                                    headers=header)
             if response.status_code == 404:
                 pass
             else:
@@ -75,9 +94,13 @@ class User:
         """returns the tier of the user"""
         acc_age_str_split = self.account_age.split()
         days_old = acc_age_str_split[0]
-        if self.followers > 4 and self.public_repos > 10 and int(days_old) > 180:
+        if self.followers > 4 and \
+                self.public_repos > 10 and \
+                int(days_old) > 180:
             return User.tiers['tier3']
-        elif self.followers > 0 and self.public_repos > 4 and int(days_old) > 90:
+        elif self.followers > 0 and \
+                self.public_repos > 4 and \
+                int(days_old) > 90:
             return User.tiers['tier2']
         else:
             return User.tiers['tier1']

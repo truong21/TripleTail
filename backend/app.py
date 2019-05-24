@@ -25,6 +25,7 @@ def page_not_found(e):
     """404 error page for nonexistent routes"""
     return jsonify({'error': "Not found"}), 404
 
+
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
     """
@@ -32,58 +33,36 @@ def homepage():
     """
     return render_template('index.html')
 
-@app.route('/tier/', methods=['POST'])
-def tier_page(debug=True):
-    """
-    Takes a POST request with the
-    Oauth2 token of the new user and
-    returns a page containing the Tier
-    and stats of the Github user
-    """
-    oauth_token = request.data
-    if oauth_token is None:
-        return render_template('index.html')
-    else:
-        user_info = User(oauth_token)
-        return render_template('ranking.html',
-                               token=oauth_token,
-                               user_info=user_info.__dict__)
 
 @app.route('/testing')
 def test():
     userinfo = {'tier': 'tier1'}
     return render_template('ranking.html', userinfo=userinfo)
 
-@app.route('/<username>/stats')
-def followers():
-    pass
 
-@app.route('/callback', methods=['GET', 'POST'])
+@app.route('/tier', methods=['GET', 'POST'])
 def handle_callback():
-  '''
+    """
     This function helps exchange temporary 'code' value with a permanent
     access_token.
-  '''
+    """
 
-  if 'code' in request.args:
-    #return jsonify(code=request.args.get('code'))
-    payload = {
-        'client_id': client_id,
-        'client_secret': client_secret,
-        'code': request.args['code']
-    }
-    headers = {'Accept': 'application/json'}
-    req = requests.post(token_url, params=payload, headers=headers)
-    resp = req.json()
-
-    if 'access_token' in resp:
-        user_info = User(resp['access_token'])
-        return jsonify(access_token=resp['access_token'])
-        #return redirect(url_for('index'))
+    if 'code' in request.args:
+        payload = {
+            'client_id': '926a308eec433f17e3ff',
+            'client_secret': '8b3e897ad2ac2e85f558fd96571f6af5eca26511',
+            'code': request.args['code']
+        }
+        headers = {'Accept': 'application/json'}
+        req = requests.post(token_url, params=payload, headers=headers)
+        resp = req.json()
+        if 'access_token' in resp:
+            user_info = User(resp['access_token'])
+            return render_template('ranking.html', userinfo=user_info.__dict__)
+        else:
+            return render_template('index.html')
     else:
-        return jsonify(error="Error retrieving access_token"), 404
-  else:
-    return jsonify(error="404_no_code"), 404
+        return render_template('index.html')
 
 if __name__ == "__main__":
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
