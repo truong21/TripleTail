@@ -3,8 +3,11 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/ranking.css') }}">
 {% endblock %}
 
+{% block log_out %}
+<div class="col"><a href="{{ url_for('homepage') }}">Log Out</a></div>
+{% endblock %}
 {% block content %}
-
+	
   <div id="card-1" class="card card-rotating text-center flipped">
 
     <!-- Front Side -->
@@ -64,9 +67,8 @@
       </div>
     </div>
     <!-- Back Side -->
-
   </div>
-
+  
 {% endblock %}
 
 {% block script %}
