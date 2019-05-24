@@ -33,20 +33,32 @@
       <div class="card-body">
       {% if userinfo.tier == 'tier1' %}
         <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/sloth.png') }}"></div>
+        <h4 class="font-weight-bold mb-0">About This Rank</h4>
+        <hr>
+	<h6 class="font-weight-bold mb-0">Rank</h6>
+	  <p>O(n<sup>2</sup>)</p>
+        <p>This mighty sloth is on its way to greatness</p>
+	
       {% elif userinfo.tier == 'tier2' %}
         <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/elephant.png') }}"></div>
+        <h4 class="font-weight-bold mb-0">Rank</h4>
+        <hr>
+	<h6 class="font-weight-bold mb-0">Time Complexity</h6>
+	  <p>O(log(n))</p>
+        <p>Elephant</p>
+
       {% else %}
         <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/lion.png') }}"></div>
+        <h4 class="font-weight-bold mb-0">Rank</h4>
+        <hr>
+	<h6 class="font-weight-bold mb-0">Time Complexity</h6>
+	  <p>O(1))</p>
+        <p>Superstar!</p>
       {% endif %}
       	
         <!-- Content -->
-        <h4 class="font-weight-bold mb-0">About This Rank</h4>
-        <hr>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat tenetur odio suscipit non commodi vel
-          eius veniam maxime?
           <div style="cursor: pointer" id="rotateback" class="rotate-button">
-	    <a class="rotate-btn" data-card="card-1"><i class="fas fa-undo"></i>Back to Profile</a>
+	    <a class="rotate-btn" data-card="card-1"><i class="fas fa-undo"></i> Back to Profile</a>
 	  </div>
       </div>
     </div>

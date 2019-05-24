@@ -44,6 +44,8 @@
 
 .card {
   width: 75%;
+  border: 5px solid rgba(110, 196, 219, 1);
+  padding: 1rem;
 }
 
 .card-body {
