@@ -1,0 +1,12 @@
+body.black {
+  background-color: #0b0c10;
+}
+
+body.blue {
+  background-color: #45a29e;
+}
+
+.btn-clear {
+  border: none;
+  background: transparent;
+}
