@@ -1,4 +1,9 @@
-# TripleTail
+<h1 align="center">TripleTail</h1>
+<p align="center">
+  <img src="https://pbs.twimg.com/profile_images/1131772568770269184/-jjXLspY_400x400.png">
+</p>
+
+---
 
 ## Description:
 
