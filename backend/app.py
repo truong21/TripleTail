@@ -2,12 +2,13 @@
 """Start Flask web app for our TripleTail
 website"""
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 # Flask setup
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 host = '35.245.121.190'
+host = '127.0.0.1'
 
 def page_not_found(e):
     """404 error page for nonexistent routes"""
