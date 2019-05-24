@@ -34,7 +34,8 @@ def tier_page(username):
 
 @app.route('/testing')
 def test():
-    return render_template('ranking.html')
+    userinfo = {'tier': 'tier1'}
+    return render_template('ranking.html', userinfo=userinfo)
 
 @app.route('/<username>/stats')
 def followers():
