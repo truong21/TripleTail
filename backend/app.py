@@ -3,13 +3,18 @@
 website"""
 
 from flask import Flask, jsonify, render_template
+from flask_cors import CORS, cross_origin
 from user import User
 
 # Flask setup
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-host = '35.245.121.190'
 host = '127.0.0.1'
+host = '0.0.0.0'
+
+# Cross-Origin Resource sharing
+cors = CORS(app, resouces={r"/*": {"origins": "*"}})
+
 
 def page_not_found(e):
     """404 error page for nonexistent routes"""
