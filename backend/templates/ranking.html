@@ -11,8 +11,7 @@
     <div class="face front">
 
       <!-- Avatar -->
-      <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20).jpg" class="rounded-circle"
-          alt="Sample avatar image.">
+      <div class="avatar-git mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20).jpg" class="rounded-circle img" alt="Sample avatar image.">
       </div>
 
       <!-- Content -->
@@ -33,11 +32,11 @@
     <div class="face back">
       <div class="card-body">
       {% if userinfo.tier == 'tier1' %}
-        <div class="avatar mx-auto white"><img src="{{ url_for('static', filename='images/sloth.png') }}" class="img-fluid">
+        <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/sloth.png') }}"></div>
       {% elif userinfo.tier == 'tier2' %}
-        <p>Hi</p>
+        <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/elephant.png') }}"></div>
       {% else %}
-        <p> last </p>
+        <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/lion.png') }}"></div>
       {% endif %}
       	
         <!-- Content -->
