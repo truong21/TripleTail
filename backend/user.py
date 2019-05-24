@@ -22,8 +22,15 @@ class User:
         self.followers = self.followers()
         self.account_age = self.account_age()
         self.readme_pct = self.readme_pct()
+        self.tier = self.tier()
+        self.avatar_url = self.avatar_url()
+        self.following = self.following()
+        self.bio = self.bio()
+        self.hireable = self.hireable()
+        self.name = self.name()
+        self.email = self.email()
 
-    def user_dict(self):
+        def user_dict(self):
         """creates dictionary of user's info"""
         usern = self.username
         passw = self.password
