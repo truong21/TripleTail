@@ -1,0 +1,22 @@
+{
+  "name": "tripletail",
+  "version": "1.0.0",
+  "description": "Derrick's README",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stak21/TripleTail.git"
+  },
+  "author": "Shoji Takashima, Sammie Azad, Susan Su, Phu Truong, Stef Silverio, Derrick Gee, Wendy Leung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stak21/TripleTail/issues"
+  },
+  "homepage": "https://github.com/stak21/TripleTail#readme",
+  "dependencies": {
+    "simple-crypto-js": "^2.0.2"
+  }
+}
