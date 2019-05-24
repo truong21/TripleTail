@@ -13,21 +13,26 @@ class User:
     url = 'https://api.github.com'
     tiers = {'tier1': 'O(n!)', 'tier2': 'O(n)', 'tier3': 'O(1)'}
 
-    def __init__(self, username, password):
+    def __init__(self, token):
         """instantiation of User class object"""
-        self.username = username
-        self.password = password
+        self.token = token
         self.user_dict = self.user_dict()
+        self.username = self.username()
         self.public_repos = self.public_repos()
         self.followers = self.followers()
         self.account_age = self.account_age()
         self.readme_pct = self.readme_pct()
+        self.tier = self.tier()
+        self.avatar_url = self.avatar_url()
+        self.following = self.following()
+        self.bio = self.bio()
+        self.hireable = self.hireable()
+        self.name = self.name()
+        self.email = self.email()
 
     def user_dict(self):
         """creates dictionary of user's info"""
-        usern = self.username
-        passw = self.password
-        r = requests.get('https://api.github.com/user', auth=(usern, passw))
+        r = requests.get('https://api.github.com/user', auth=(self.token))
         allowed = ['public_repos', 'followers']
         return r.json()
 
@@ -45,16 +50,21 @@ class User:
         self.created_at = datetime.strptime(self.user_dict['created_at'], "%Y-%m-%dT%H:%M:%SZ")
         age = self.now - self.created_at
         age_str = str(age)
-        age_str_split = re.split('[, :\.]+', age_str)
-        age_dhms = age_str_split[0] + ' ' + age_str_split[1] + ' ' + age_str_split[2] + ' hours ' + age_str_split[3] + ' minutes ' + age_str_split[4] + ' seconds'
+        age_str_split = re.split('[, :\.]*', age_str)
+        if len(age_str_split) > 5:
+            age_dhms = age_str_split[0] + ' ' + age_str_split[1] + ' ' + age_str_split[2] + ' hours ' + age_str_split[3] + ' minutes ' + age_str_split[4] + ' seconds'
+        else:
+            age_dhms = '0 days ' + age_str_split[0] + ' hours ' + age_str_split[1] + ' minutes ' + age_str_split[2] + ' seconds'
         return age_dhms
 
     def readme_pct(self):
         """Returns the percentage of repos that have a README"""
-        repo_list = requests.get('{}/users/{}/repos'.format(self.url, self.username), auth=(self.username, self.password)).json()
+        repo_list = requests.get('{}/users/{}/repos'.format(self.url, self.username), auth=(self.token)).json()
         readme_count = 0
+        if self.user_dict.get('public_repos') is 0:
+            return 0
         for repo in repo_list:
-            response = requests.get('{}/repos/{}/{}/readme'.format(self.url, self.username, repo.get('name')), auth=(self.username, self.password))
+            response = requests.get('{}/repos/{}/{}/readme'.format(self.url, self.username, repo.get('name')), auth=(self.token))
             if response.status_code == 404:
                 pass
             else:
@@ -75,6 +85,10 @@ class User:
     def avatar_url(self):
         """returns url of user's avatar"""
         return self.user_dict['avatar_url']
+
+    def username(self):
+        """returns username"""
+        return self.user_dict['login']
 
     def following(self):
         """returns number of users the user is following"""
