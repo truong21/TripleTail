@@ -2,11 +2,12 @@
 """Start Flask web app for our TripleTail
 website"""
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, redirect
 from flask_cors import CORS, cross_origin
 from user import User
 
 import requests
+import os
 
 # Flask setup
 app = Flask(__name__)
@@ -19,7 +20,8 @@ cors = CORS(app, resouces={r"/*": {"origins": "*"}})
 authorization_base_url = 'https://github.com/login/oauth/authorize'
 token_url = 'https://github.com/login/oauth/access_token'
 request_url = 'https://api.github.com'
-
+client_id = os.environ.get('CLIENT_ID')
+client_secret = os.environ.get('CLIENT_SECRET')
 
 def page_not_found(e):
     """404 error page for nonexistent routes"""
@@ -31,6 +33,8 @@ def homepage():
     """
     Landing page
     """
+    if request.method == 'POST':
+        return redirect("https://github.com/login/oauth/authorize?client_id={}".format(client_id));
     return render_template('index.html')
 
 
@@ -49,8 +53,8 @@ def handle_callback():
 
     if 'code' in request.args:
         payload = {
-            'client_id': '926a308eec433f17e3ff',
-            'client_secret': '8b3e897ad2ac2e85f558fd96571f6af5eca26511',
+            'client_id': client_id,
+            'client_secret': client_secret,
             'code': request.args['code']
         }
         headers = {'Accept': 'application/json'}
