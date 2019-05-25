@@ -1,4 +1,10 @@
-Fabric3==1.14.post1
-Python3==3.4.3
-Flask==1.0.2
-beautifulsoup4==4.7.1
+Web Server Deployment
+-------------------------
+        NGINX==1.10.3
+        gUnicorn==19.9.0
+        Python3==3.4.3
+        Flask==1.0.2
+Backend
+-------------------------
+        Fabric3==1.14.post1
+        beautifulsoup4==4.7.1

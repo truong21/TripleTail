@@ -3,6 +3,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/ranking.css') }}">
 {% endblock %}
 
+{% block title %}Ranking{% endblock %}
+
 {% block log_out %}
 <div class="col"><a href="{{ url_for('homepage') }}">Log Out</a></div>
 {% endblock %}
@@ -20,13 +22,14 @@
       <!-- Content -->
       <div class="card-body">
         <h4 class="font-weight-bold mb-3">{{ userinfo.name }}</h4>
-        <p class="font-weight-bold blue-text">{{ userinfo.username }}</p>
-	<p class="font-weight-bold blue-text">Public Repos: {{ userinfo.public_repos }}</p>
-	<p class="font-weight-bold blue-text">Followers: {{ userinfo.followers }}</p>
-	<p class="font-weight-bold blue-text">Hireable: {{ userinfo.hireable }}</p>
+        <p><b>Username:</b> {{ userinfo.username }}</p>
+	<p><b>Public Repos:</b> {{ userinfo.public_repos }}</p>
+	<p><b>Followers:</b> {{ userinfo.followers }}</p>
+	<p><b>Commits:</b> {{ userinfo.commits }}</p>
+	<p><b>Hireable:</b> {{ userinfo.hireable }}</p>
 	<!-- Triggering button -->
         <div style="cursor: pointer" id="rotatefront" class="rotate-button">
-	  <a class="rotate-btn" data-card="card-1"><i class="fas fa-redo-alt"></i> Click here to see your ranking!</a>
+	  <a class="rotate-btn" data-card="card-1"><i class="fas fa-redo-alt"></i><b> Click here to see your ranking!</b></a>
 	</div>
       </div>
     </div>
@@ -40,29 +43,29 @@
         <h4 class="font-weight-bold mb-0">About This Rank</h4>
         <hr>
 	<h6 class="font-weight-bold mb-0">Rank</h6>
-	  <p>O(n!)</p>
-        <p>This mighty sloth is on its way to greatness</p>
+	  <p><b>O(n!)</b> &nbsp;&nbsp;O(n) &nbsp;&nbsp;O(1)</p>
+        <h5>This mighty sloth is on its way to greatness</h5>
 	
       {% elif userinfo.tier == 'O(n)' %}
         <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/elephant.png') }}"></div>
         <h4 class="font-weight-bold mb-0">Rank</h4>
         <hr>
 	<h6 class="font-weight-bold mb-0">Time Complexity</h6>
-	  <p>O(n)</p>
-        <p>Mediocrity is the elephant in the room</p>
+	  <p>O(n!) &nbsp;&nbsp;<b>O(n)</b> &nbsp;&nbsp;O(1)</p>
+        <h5>Mediocrity is the elephant in the room</h5>
         
       {% else %}
         <div class="avatar-animal mx-auto white"><img class="img" src="{{ url_for('static', filename='images/lion.png') }}"></div>
         <h4 class="font-weight-bold mb-0">Rank</h4>
         <hr>
 	<h6 class="font-weight-bold mb-0">Time Complexity</h6>
-	  <p>O(1)</p>
-        <p>Long live the king!</p>
+	  <p>O(n!) &nbsp;&nbsp;O(n) &nbsp;&nbsp;<b>O(1)</b></p>
+        <h5>Long live the king!</h5>
       {% endif %}
       	
         <!-- Content -->
           <div style="cursor: pointer" id="rotateback" class="rotate-button">
-	    <a class="rotate-btn" data-card="card-1"><i class="fas fa-undo"></i> Back to Profile</a>
+	    <a class="rotate-btn" data-card="card-1"><i class="fas fa-undo"></i><b> Back to Profile</b></a>
 	  </div>
       </div>
     </div>

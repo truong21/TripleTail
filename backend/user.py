@@ -30,6 +30,7 @@ class User:
         self.hireable = self.hireable()
         self.name = self.name()
         self.email = self.email()
+        self.commits = ((self.public_repos + self.followers) * 110)
 
     def user_dict(self):
         """creates dictionary of user's info"""
@@ -103,6 +104,27 @@ class User:
         else:
             return User.tiers['tier1']
 
+    def commits(self):
+        """returns number of commits"""
+        from bs4 import BeautifulSoup
+        from requests import get
+        from sys import argv
+        
+        url = 'https://github.com/{}'.format(self.username)
+        url = 'https://github.com/suhearsawho'
+        header = {"User-Agent": "Holberton"}
+        page = get(url, headers=header)
+        soup = BeautifulSoup(page.text, "html.parser")
+        resdiv = soup.find_all("h2", {"class": "f4 text-normal mb-2"})
+        reslist = []
+
+        for i in resdiv:
+            reslist.append(i.text)
+
+        data = reslist[0]
+        data = data.split("contributions")
+        return data[0].strip()
+
     def avatar_url(self):
         """returns url of user's avatar"""
         return self.user_dict['avatar_url']
@@ -130,3 +152,11 @@ class User:
     def email(self):
         """get users email"""
         return self.user_dict['email']
+    
+    def commits(self):
+        """get users email"""
+        return self.user_dict['commits']
+
+if __name__ == "__main__":
+    url = argv[1]
+    commits = scrape_commits(url)
