@@ -10,7 +10,7 @@
 
 **What Tripletail does**: Help the worlds best software engineers build stronger Github profiles and ultimately get hired. Tripletail provides software engineers with real time metrics about the quality of their Github profile and how they stack up in the community.
 
-**How we do it**: Tripletail retrieves relevant user data from the Github API via Github OAuth.
+**How we do it**: Tripletail retrieves relevant user data from the Github API via Github OAuth and visualizes it with avatars and rankings.
 These metrics include but are not limited to:
 
   - Number of directories with README’s
